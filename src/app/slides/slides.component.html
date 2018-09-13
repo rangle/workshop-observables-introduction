@@ -32,18 +32,7 @@
 	<div @slideAnimation *ngSwitchCase="3">
 		<h2>CallBacks</h2>
 		<p>The oldest simplest way to hand async operations</p>
-		<pre>
-const getUser = (cb) => {
-  setTimeout(() => {
-    cb({name: 'Max'});
-  }, 2000);
-};
-
-getUser((user) => {
-  console.log(user.name);
-  // Prints 'Max' after 2 seconds.
-});
-    </pre>
+		<pre>{{codeCallBack}}</pre>
 		<p><a routerLink="/callback">Experiment with code sample.</a></p>
 	</div>
 
