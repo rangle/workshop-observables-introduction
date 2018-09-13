@@ -21,6 +21,9 @@ import { observableStreamImgBase64 } from './assets/observable-stream'
 })
 export class SlidesComponent {
 
+  observablePatternImgBase64 = observablePatternImgBase64;
+  observableStreamImgBase64 = observableStreamImgBase64;
+
   constructor(private slideService: SlidesService) {
     slideService.max = 19;
   }
@@ -38,8 +41,6 @@ export class SlidesComponent {
         break;
     }
   }
-  observablePatternImgBase64 = observablePatternImgBase64;
-  observableStreamImgBase64 = observableStreamImgBase64;
 
   codeCallBack = `
 const getUser = (cb) => {
@@ -49,7 +50,7 @@ const getUser = (cb) => {
 };
 
 getUser((user) => {
-  console.log(user.name); 
+  console.log(user.name);
   // Prints 'Max' after 2 seconds.
 });`;
 
@@ -64,7 +65,7 @@ const getUser = () => {
 
 getUser()
   .then(user => {
-    console.log(user.name); 
+    console.log(user.name);
     // Prints 'Max' after 2 seconds.
   });
 `;
@@ -75,7 +76,7 @@ checkAuth()
     return getUser(authStatus);
   })
   .then(user => {
-    console.log(user.name); 
+    console.log(user.name);
     // Prints 'Max' after 2 seconds.
   })
   .catch(error => {

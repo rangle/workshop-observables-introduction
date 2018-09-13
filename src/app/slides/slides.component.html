@@ -32,7 +32,18 @@
 	<div @slideAnimation *ngSwitchCase="3">
 		<h2>CallBacks</h2>
 		<p>The oldest simplest way to hand async operations</p>
-		<pre>{{codeCallBack}}</pre>
+		<pre>
+const getUser = (cb) => {
+  setTimeout(() => {
+    cb({name: 'Max'});
+  }, 2000);
+};
+
+getUser((user) => {
+  console.log(user.name);
+  // Prints 'Max' after 2 seconds.
+});
+    </pre>
 		<p><a routerLink="/callback">Experiment with code sample.</a></p>
 	</div>
 
@@ -95,7 +106,7 @@
     <p><img src="{{observableStreamImgBase64}}" /></p>
 		<p><em>Source: <a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754" target="_blank">Wikipedia: Observable pattern</a></em></p>
 	</div>
-  
+
 
 	<div @slideAnimation *ngSwitchCase="11">
 		<h2>Observable Stream</h2>
@@ -144,7 +155,7 @@
 				<li>Observer with next, error and complete methods on it
 					<li>Return a cancellation function
 		</ul>
-		<p><small>Disclaimer: The example Observable implementations used in this presentation return cancellation functions, whereas RxJS and the es-observable spec return Subscription objects which offer a method for unsubscribing. 
+		<p><small>Disclaimer: The example Observable implementations used in this presentation return cancellation functions, whereas RxJS and the es-observable spec return Subscription objects which offer a method for unsubscribing.
   </small></p>
   	<a routerLink="/one">Lesson 1: Building Observable from scratch</a>
 	</div>
