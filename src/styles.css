@@ -1,0 +1,18 @@
+/* Add application styles & imports to this file! */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "arial";
+}
+
+.r-color {
+  color: #342041;
+}
+.r-bg-color {
+  background-color: #342041;
+}
+code, pre {
+  padding: 0 .5rem;
+  color: #82045f;
+  background-color: #eee
+}

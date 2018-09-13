@@ -1,0 +1,196 @@
+<div class="flex justify-between">
+	<button (click)="slideService.prevSlide()" [disabled]="slideService.isFirst">Prev</button>
+	<span>{{slideService.slide}}/{{slideService.max}}</span>
+	<button (click)="slideService.nextSlide()" [disabled]="slideService.isLast">Next</button>
+</div>
+
+<div [ngSwitch]="slideService.slide">
+
+	<div @slideAnimation *ngSwitchCase="0">
+		<h1 class="tc ma5">Observables: Introduction.</h1>
+    <p class="tc">@Rangle.io</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="1">
+		<h2>Foreword</h2>
+		<p>Observables provide support for passing messages between publishers and subscribers in your application. Observables offer
+			significant benefits over other techniques for event handling, asynchronous programming, and handling multiple values.
+			Observables are declarative—that is, you define a function for publishing values, but it is not executed until a consumer
+			subscribes to it. The subscribed consumer then receives notifications until the function completes, or until they unsubscribe.</p>
+		<p>Because of these advantages, observables are used extensively within Angular, and are recommended for app development as
+			well.
+		</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="2">
+		<h2>History of asynchronous operations </h2>
+		<p>Handling async operations is important task.</p>
+		<p>Javascript by default is synchronous, executes one line after the other. Therefore we need some tools to handle async tasks.
+		</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="3">
+		<h2>CallBacks</h2>
+		<p>The oldest simplest way to hand async operations</p>
+		<pre>{{codeCallBack}}</pre>
+		<p><a routerLink="/callback">Experiment with code sample.</a></p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="4">
+		<h2>Callback Hell</h2>
+		<p>The idea behind callbacks indeed isn't bad and there is a reason why it's still getting used all over the web. But when
+			working with a lot of dependent asynchronous operations, you quickly end up in callback hell.</p>
+		<p>It could quickly grow to use multiple callbacks and nesting them into each other won't make your code easier to read, understand
+			or maintain.</p>
+		<p>Debugging it can be a pain and it certainly isn't readable anymore once you reach three or four levels of nesting.</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="5">
+		<h2>Promising a Better Future</h2>
+		<p>ES6 introduces a solution: Promises!</p>
+		<p>With the help of various third-party libraries, you could and can use the concept of promises in an ES5
+		</p>
+		<pre>{{codePromises}}</pre>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="6">
+		<h2>Promises chain</h2>
+		<p>It might not immediately look that much better than callbacks but consider that we only use one asynchronous operation
+			here! The real power of promises can be seen once we start using dependent async operations.
+		</p>
+		<pre>{{codePromiseChain}}</pre>
+    <p><a routerLink="/promises">Experiment with code sample.</a></p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="7">
+		<h2>Are we happy with Promises?</h2>
+		<p>Promises are pretty great.</p>
+		<p>They do have one limitation though: You may only handle one asynchronous operation with each promise.</p>
+		<p>Think about user events. They're certainly asynchronous as you can't block your code to wait for them to occur. You can't
+			really handle them with promises though. You could handle one event (e.g. click on a button) but thereafter your promise
+			is resolved and can't react to further clicks.</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="8">
+		<h2>RxJS Observables</h2>
+		<p>Promises aren't bad, not at all. But there is a better way: Observables.</p>
+		<p>Two biggest arguments for using observables over promises.</p>
+		<ul>
+			<li> You're working with streams of data instead of single values
+				<li>You got an amazing toolset of operators at your disposal to manipulate, transform and work with your async data
+		</ul>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="9">
+		<h2>Observer Pattern</h2>
+		<p>In the Observer pattern, an object, called the Subject, maintains a list of its Observers and notifies them automatically
+			of any state changes, usually by calling a callback function.</p>
+		<p>It is used to implement distributed event handling systems.</p>
+    <p><img src="{{observablePatternImgBase64}}" /></p>
+		<p><em>Source: <a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank">Wikipedia: Observable pattern</a></em></p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="10">
+		<h2>Observable Stream</h2>
+    <p><img src="{{observableStreamImgBase64}}" /></p>
+		<p><em>Source: <a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754" target="_blank">Wikipedia: Observable pattern</a></em></p>
+	</div>
+  
+
+	<div @slideAnimation *ngSwitchCase="11">
+		<h2>Observable Stream</h2>
+		<p>The Observable stream is a sequence of ongoing events ordered in time that Observers can be subscribed to. There are three
+			things that the Observable can emit: a value (of some type), an error, or the completed event, signaling the end of the
+			stream.
+		</p>
+		<p>These events are caught asynchronously via a function that is supplied by the Observer to be called when a value is emitted.
+			The Observer may also supply a function to be called in the event of an error or when the stream completes.</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="12">
+		<h2>Flipping the Model</h2>
+		<h3>Traditionally</h3>
+		<p>When we think about interactions in our application, we often think about taking user input and generating some kind of
+			output.
+		</p>
+		<ol>
+			<li>Call a method
+				<li>Store return value as a variable
+					<li>Use that variable elsewhere
+		</ol>
+		<h3>Inverted</h3>
+		<p>But, the observable emits (output) a value that is funneled to our Observer as an input on one of its methods.</p>
+		<ol>
+			<li>Define observer methods
+				<li>Define async call as Observable
+					<li>Attach observer to the observable
+						<li>Resume application (no need to wait for the async call to resolve)
+		</ol>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="13">
+		<h2>Understanding the Contract</h2>
+		<p>The Observable may call `onNext` zero or more times. Afterwhich it may call either onError or onCompleted, but not both.
+			This call ends the Observable.</p>
+		<p>In subscribing to an Observable, you may provide three functions, first for next, then error and finally complete. You
+			may also simply provide an object that implements the Observer interface with these three methods.</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="14">
+		<h2>The Observable</h2>
+		<p>Observable is just a function that takes an observer and returns a function. We can build our own if we follow the shape:</p>
+		<ul>
+			<li>A function
+				<li>Observer with next, error and complete methods on it
+					<li>Return a cancellation function
+		</ul>
+		<p><small>Disclaimer: The example Observable implementations used in this presentation return cancellation functions, whereas RxJS and the es-observable spec return Subscription objects which offer a method for unsubscribing. 
+  </small></p>
+  	<a routerLink="/one">Lesson 1: Building Observable from scratch</a>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="15">
+		<h2>Observer Guarantees</h2>
+		<p>Not all methods on the observer must be defined</p>
+		<p>You don’t want to call <code>next</code> after <code>complete</code> or <code>error</code></p>
+		<p>Nothing should be called after you unsubscribe</p>
+		<p>Calls to <code>complete</code> and <code>error</code> should also call the internal unsubscription logic</p>
+		<p>If any of the handlers throw an error, unsubscription logic should also be called to avoid memory leaks <code>next</code>,
+			<code>error</code> and <code>complete</code> are all optional.</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="16">
+		<h2>Safe Observable</h2>
+		<p>To meet the guarantees we laid out before, we need to rework our implementation.</p>
+		<p>Let’s wrap our observable with a SafeObservable to reuse some of this functionality.</p>
+		<a routerLink="/two">Lesson 2: Safe Observable</a>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="17">
+		<h2>Operators: map</h2>
+		<p>Operators are simply functions that take an Observable as a parameter and return a new observable which will be subscribed
+			to the source Observable when you subscribe to it.</p>
+		<p>Using our custom Observable, we can make an operator to test this out.</p>
+		<pre>{{codeMap}}</pre>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="18">
+		<h2>Chaining Operators</h2>
+		<p>With the current implementation, chaining operators together quickly becomes lengthy and unwieldy.
+		</p>
+		<pre>map(map(myObservable, (x) => x + 1), (x) => x + 2);</pre>
+		<p>This could be implemented a few different ways.
+			<p><code>pipe(myObservable, map(x => x + 1), map(x => x * 2));</code></p>
+			<p><code>myObservable.pipe(map(x => x + 1), map(x => x * 2))</code></p>
+			<p><code>myObservable.map(x => x + 1).map(x => x * 2)</code></p>
+			<p>TODO: example code</p>
+	</div>
+
+	<div @slideAnimation *ngSwitchCase="19">
+		<h2>Summary</h2>
+		<p>An Observable is a function that takes an observer and returns a function</p>
+		<p>When dealing with one, treat it like a function reference being passed around</p>
+		<p>When chaining operators, you are composing a function with a chain of observers to pass the values through</p>
+	</div>
+
+</div>
